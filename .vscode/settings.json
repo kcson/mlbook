@@ -1,0 +1,7 @@
+{
+    "python.pythonPath": "C:\\Users\\fob33\\Anaconda3\\python.exe",
+    "python.linting.pylintEnabled": false,
+    "python.formatting.autopep8Args": [
+        "--max-line-length=200" 
+    ]
+}
