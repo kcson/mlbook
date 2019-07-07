@@ -3,6 +3,7 @@ import os
 import tensorflow as tf
 import matplotlib
 import matplotlib.pyplot as plt
+from sklearn.datasets import load_sample_image
 
 
 def reset_graph(seed=42):
@@ -38,4 +39,14 @@ def plot_color_image(image):
     plt.imshow(image.astype(np.uint8), interpolation="nearest")
     plt.axis("off")
 
+
+china = load_sample_image("china.jpg")
+flower = load_sample_image("flower.jpg")
+dataset = np.array([china, flower], dtype=np.float32)
+batch_size, height, width, channels = dataset.shape
+
+filters = np.zeros(shape=(7, 7, channels, 2), dtype=np.float32)
+# filter
+filters[:, 3, :, 0] = 1 #수직
+filters[3, :, :, 1] = 1 #수평
 
