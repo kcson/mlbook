@@ -55,15 +55,22 @@ filters[3, :, :, 1] = 1  # 수평
 X = tf.placeholder(tf.float32, shape=(None, height, width, channels))
 # convolution = tf.nn.conv2d(X, filters, strides=[1, 2, 2, 1], padding="SAME")
 convolution = tf.layers.conv2d(X, filters=2, kernel_size=7, strides=[2, 2], padding="SAME")
+max_pool = tf.nn.max_pool(X, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding="VALID")
 
 init = tf.global_variables_initializer()
 
 with tf.Session() as sess:
     init.run()
     output = sess.run(convolution, feed_dict={X: dataset})
+    pooling = sess.run(max_pool, feed_dict={X: dataset})
 
+print(pooling.shape)
 # plt.imshow(output[1, :, :, 1], cmap="gray")
 # plt.show()
+plot_color_image(pooling[0])
+plt.show()
+plot_color_image(dataset[0])
+plt.show()
 
 for image_index in (0, 1):
     for feature_map_index in (0, 1):
